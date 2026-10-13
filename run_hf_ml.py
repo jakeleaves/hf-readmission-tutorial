@@ -124,12 +124,11 @@ def prepare_env(source: str) -> None:
 
 def execute(source: str) -> bool:
     prepare_env(source)
-    subprocess.check_call([sys.executable, os.path.join(ROOT, "build_hf_ml_notebook.py")])
     subprocess.check_call([
         sys.executable, "-m", "ipykernel", "install", "--sys-prefix",
         "--name", "mimic-ml", "--display-name", "Python (mimic-ml)",
     ])
-    template = os.path.join(ROOT, "build", "hf_ml_template.ipynb")
+    template = os.path.join(ROOT, "hf_readmission_ml_tutorial.ipynb")
     nb = nbformat.read(template, as_version=4)
     if source == "synthetic":
         art = os.path.join(ROOT, "build", "hf_synthetic")
